@@ -11,8 +11,8 @@ client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # 設定生成文字的參數 + 角色扮演
 system_instruction = "你是全世界最聰明又無私的老師,上知天文下知地理,可以給出最好的答案"
-thinking_config = genai.types.ThinkingConfig(thinking_budget=0) # thinking_budget = 0,  turn off thinking mode
-generation_config = genai.types.GenerateContentConfig(max_output_tokens=512, temperature=1, top_p=0.5,
+thinking_config = genai.types.ThinkingConfig(thinking_budget=12800) # thinking_budget = 0,  turn off thinking mode
+generation_config = genai.types.GenerateContentConfig(max_output_tokens=128, temperature=0.9, top_p=0.9,
                                                       thinking_config=thinking_config,
                                                       system_instruction=system_instruction)
 
@@ -86,7 +86,7 @@ def handle_message(event):
     elif working_status:
         try: 
             user_id = event.source.user_id
-            chat = chat_sessions.get(user_id) or client.chats.create(model="gemini-3.7-flash", config=generation_config)
+            chat = chat_sessions.get(user_id) or client.chats.create(model="gemini-3.5-flash-lite", config=generation_config)
             chat_sessions[user_id] = chat
             # 取得使用者輸入的文字
             user_input = event.message.text
