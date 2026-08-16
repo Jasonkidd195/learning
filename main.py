@@ -10,9 +10,9 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSend
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # 設定生成文字的參數 + 角色扮演
-system_instruction = "你是全世界最聰明又無私的老師,上知天文下知地理,可以給出最好的答案"
+system_instruction = "你是全世界最聰明又無私的老師,可以給出最好的答案"
 thinking_config = genai.types.ThinkingConfig(thinking_budget=0) # thinking_budget = 0,  turn off thinking mode
-generation_config = genai.types.GenerateContentConfig(max_output_tokens=256, temperature=1, top_p=0.9,
+generation_config = genai.types.GenerateContentConfig(max_output_tokens=1256, temperature=1, top_p=0.9,
                                                       thinking_config=thinking_config,
                                                       system_instruction=system_instruction)
 
